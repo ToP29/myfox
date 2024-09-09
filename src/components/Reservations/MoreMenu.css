@@ -1,0 +1,8 @@
+.more-menu {
+	z-index: 2;
+}
+.more-menu .menu-content {
+	position: absolute;
+	margin-top: 6px;
+	left: 157px; // this is hack, I would use poppor in real app
+}

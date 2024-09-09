@@ -1,0 +1,23 @@
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: 5px solid #17a619;
+}
+
+.header img {
+	display: inline-block;
+	height: 22px;
+}
+
+.header .left {
+	display: flex;
+	padding: 10px;
+	align-items: center;
+	gap: 10px;
+}
+
+.header .left span {
+	font-weight: 600;
+	text-transform: uppercase;
+}

@@ -1,0 +1,33 @@
+.reservations {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.reservation .carts {
+	margin-top: 1.5rem;
+}
+.reservation .details .actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 1.5rem;
+}
+.reservation .shop .name {
+	font-weight: 600;
+}
+.reservation .shop .phone,
+.reservation .shop .address {
+	color: #888888;
+	font-size: 14px;
+}
+
+.reservation .cart:not(:last-of-type) {
+	margin-bottom: 1rem;
+}
+.reservation .cart .name {
+	font-weight: 600;
+}
+.reservation .cart .details {
+	color: #888888;
+	font-size: 14px;
+}
