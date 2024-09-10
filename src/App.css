@@ -5,7 +5,13 @@
 	flex-direction: column;
 }
 
-.root .body {
-	flex: 1;
+.router-body {
 	overflow: auto;
+	padding-block: 6px;
+	padding-inline: 12px;
+}
+
+.page-title {
+	font-size: 24px;
+	color: #555555;
 }

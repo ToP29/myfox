@@ -1,37 +1,42 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
-import { IconButton } from '@mui/material'
+import { ClickAwayListener, IconButton } from '@mui/material'
 import MenuContent from './MenuContent'
-import './Menu.css'
+
+const ID = 'menu'
 
 const Menu: FC = () => {
-	const wrapperRef = useRef(null)
+	const buttonRef = useRef(null)
 	const [isOpen, setOpen] = useState(false)
 
 	function toggleMenu() {
 		setOpen(!isOpen)
 	}
 
-	useEffect(() => {
-		function handleClickOutside(event) {
-			if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-				setOpen(false)
-			}
-		}
-		document.addEventListener('mousedown', handleClickOutside)
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside)
-		}
-	}, [wrapperRef])
+	function closeMenu() {
+		setOpen(false)
+	}
 
 	return (
-		<div className="menu" ref={wrapperRef}>
-			<IconButton aria-label="menu" onClick={toggleMenu} sx={{ outline: '0 !important' }}>
-				<MenuIcon />
-			</IconButton>
-			<MenuContent isOpen={isOpen} />
-		</div>
+		<ClickAwayListener onClickAway={() => setOpen(false)}>
+			<div className="menu">
+				<IconButton
+					aria-label="menu"
+					aria-describedby={ID}
+					onClick={toggleMenu}
+					ref={buttonRef}
+				>
+					<MenuIcon />
+				</IconButton>
+				<MenuContent
+					isOpen={isOpen}
+					id={ID}
+					anchorEl={buttonRef.current}
+					closeMenu={closeMenu}
+				/>
+			</div>
+		</ClickAwayListener>
 	)
 }
 

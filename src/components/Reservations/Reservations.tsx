@@ -2,6 +2,9 @@ import { FC } from 'react'
 import { useQuery, gql } from '@apollo/client'
 import Reservation from './Reservation'
 import './Reservations.css'
+import { CircularProgress } from '@mui/material'
+
+const CUSTOMER_ID = 'cm0b8kilabkyu0783rc2uuzax'
 
 const GET_RESERVATIONS = gql`
 	query Calendars($orderBy: CalendarOrderByInput, $where: CalendarWhereInput, $first: Int) {
@@ -59,21 +62,29 @@ const Reservations: FC = () => {
 			orderBy: 'uuid_ASC',
 			where: {
 				state: 'Open',
+				customers_every: {
+					id: CUSTOMER_ID,
+				},
 			},
-			first: 5,
+			first: 20,
 		},
 	})
-	console.log('data:', data)
-	return (
-		<div style={{ paddingBlock: 6, paddingInline: 12 }}>
-			<h1 style={{ fontSize: 24, color: '#555555' }}>Moje rezervace</h1>
-			<div className="reservations">
-				{data?.calendars.map((reservation) => (
-					<Reservation reservation={reservation} />
-				))}
-			</div>
-		</div>
-	)
+	if (loading) return <CircularProgress />
+	if (data?.calendars) {
+		return (
+			<>
+				<h1 className="page-title">Moje rezervace</h1>
+				<div className="reservations">
+					{data.calendars
+						.filter((reservation) => reservation.carts.length > 0)
+						.map((reservation) => (
+							<Reservation reservation={reservation} key={reservation.id} />
+						))}
+				</div>
+			</>
+		)
+	}
+	return <div>Error: {error.message}</div>
 }
 
 export default Reservations

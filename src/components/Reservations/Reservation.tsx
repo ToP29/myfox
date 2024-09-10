@@ -56,17 +56,24 @@ const Reservation: FC = ({ reservation }) => {
 						<div className="phone">tel {reservation.shop.phone}</div>
 					</div>
 					<div className="carts">
-						{reservation.carts.map((cart) => (
-							<div className="cart" key={cart.name}>
-								<div className="name">{cart.name}</div>
-								<div className="from">
-									{dayjs(reservation.from).format('DD.MM.YYYY h:mm')}
-								</div>
-								<div className="details">
-									{cart.item.duration} minut, {cart.item.price} Kč
-								</div>
+						<div className="cart">
+							<div className="name">
+								{reservation.carts.map((cart) => cart.name).join(', ')}
 							</div>
-						))}
+							<div className="from">
+								{dayjs(reservation.from).format('DD.MM.YYYY h:mm')}
+							</div>
+							<div className="details">
+								{reservation.carts.reduce((acc, cart) => {
+									return acc + cart.item.duration
+								}, 0)}
+								&nbsp; minut,&nbsp;
+								{reservation.carts.reduce((acc, cart) => {
+									return acc + cart.item.price
+								}, 0)}
+								&nbsp; Kč
+							</div>
+						</div>
 					</div>
 					<div className="actions">
 						<Button variant="contained" color="inherit" disableElevation>
