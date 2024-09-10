@@ -67,11 +67,11 @@ const Reservation: FC = ({ reservation }) => {
 								{reservation.carts.reduce((acc, cart) => {
 									return acc + cart.item.duration
 								}, 0)}
-								&nbsp; minut,&nbsp;
+								&nbsp;minut,&nbsp;
 								{reservation.carts.reduce((acc, cart) => {
-									return acc + cart.item.price
+									return acc + cart.priceVat
 								}, 0)}
-								&nbsp; Kč
+								&nbsp;Kč
 							</div>
 						</div>
 					</div>

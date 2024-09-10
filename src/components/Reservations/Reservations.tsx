@@ -9,17 +9,9 @@ const CUSTOMER_ID = 'cm0b8kilabkyu0783rc2uuzax'
 const GET_RESERVATIONS = gql`
 	query Calendars($orderBy: CalendarOrderByInput, $where: CalendarWhereInput, $first: Int) {
 		calendars(orderBy: $orderBy, where: $where, first: $first) {
-			capacity
-			groupClass
-			createdAt
 			from
-			id
-			note
-			state
 			to
-			updatedAt
-			isOnlineReservation
-			canBeCancelUntil
+			id
 			shop {
 				name
 				phone
@@ -38,14 +30,10 @@ const GET_RESERVATIONS = gql`
 			}
 			carts {
 				name
-				price
 				priceVat
 				item {
 					duration
 					name
-					price
-					meta
-					note
 					picture {
 						name
 						secret
